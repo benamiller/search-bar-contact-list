@@ -1,11 +1,15 @@
 import { useState } from "react";
+import SearchBar from './SearchBar';
 
 function Search() {
   const [usersSearch, setUsersSearch] = useState("");
 
   return (
     <div>
-      <p>You searched for {usersSearch}</p>
+      <SearchBar
+        searchValue={usersSearch}
+        searchValueFunction={setUsersSearch}
+      />
     </div>
   );
 }
