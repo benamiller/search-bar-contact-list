@@ -1,22 +1,14 @@
 import { useState, useEffect } from "react";
 import SearchBar from './SearchBar';
 import Contact from './Contact';
+import useFetch from '../hooks/useFetch';
 
 function Search() {
   const [usersSearch, setUsersSearch] = useState("");
-  const [contactData, setContactData] = useState([]);
   const [userHasSearched, setUserHasSearched] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-
-  useEffect(() => {
-    getContactData();
-  }, []);
-  
-  async function getContactData() {
-    const response = await fetch("http://contactlist.us-east-1.elasticbeanstalk.com/contacts");
-    const data = await response.json();
-    setContactData(data);
-  }
+  let url = "http://contactlist.us-east-1.elasticbeanstalk.com/contacts";
+  const [contactData, error] = useFetch(url);
 
   function filterContactData(searchTerm) {
     setUserHasSearched(true);
